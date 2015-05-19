@@ -10,7 +10,7 @@ var email = require('./emails/email');
 var port = process.env.PORT || 3000;
 
 // set the Access-Control-Allow-Origin header to the allowed origins
-app.use('/', function(req, res, next){
+app.use('/newapplicant', function(req, res, next){
   res.set('Access-Control-Allow-Origin', '*');
   next();
 });
@@ -20,6 +20,9 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()); // Body parser use JSON data
 
+app.get('/', function(req, res){
+  res.send('test');
+});
 
 app.post('/newapplicant', function(req, res){
   var applicantData = req.body;
@@ -47,7 +50,7 @@ app.post('/newapplicant', function(req, res){
       mailer.sendMail(adminEmailObj, emails);  //send administrators email about the applicant
     })
     .then(function(promisedValue){
-      res.end();
+      res.send('new applicant saved');
     });
 });
 
