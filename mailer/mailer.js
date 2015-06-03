@@ -1,32 +1,16 @@
-var Promise = require('bluebird');
-var sendgrid = require('sendgrid')();
-// var nodemailer = require('nodemailer');
+var api_key = process.env.SENDGRID_API_KEY || require('../secret/credentials')['sendgrid_api_key'];
 
 module.exports = {
   sendMail: function(emailObj, applicantEmailAddr){
-    var transporter = nodemailer.createTransport({
-      service: 'Gmail',
-      auth: {
-        user: process.env.GMAILACCOUNT || require('../secret/credentials')['gmailAccount'],
-        pass: process.env.GMAILPASSWORD || require('../secret/credentials')['gmailPassword']
-      }
-    });
-
-    var options = {
-      from: 'Moringa School Admissions <admissions@moringaschool.com>',
-      subject: emailObj.emailSubject,
-      html: emailObj.emailContent,
-      to: applicantEmailAddr
-    };
-    return new Promise(function(resolve, reject){
-      transporter.sendMail(options, function(err, info) {
-        if (err) {
-          console.log("error is: ",err);
-          return;
-        }
-        resolve(info);
-        return;
-      });
+    var sendgrid  = require('sendgrid')(api_key);
+    sendgrid.send({
+      to:       applicantEmailAddr,
+      from:     'admissions@moringaschool.com',
+      subject:  emailObj.emailSubject,
+      html:     emailObj.emailContent
+    }, function(err, json) {
+      if (err) { return console.error(err); }
+      console.log(json);
     });
   }
 };
