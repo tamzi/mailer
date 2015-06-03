@@ -4,8 +4,7 @@ var emails = require('./emails/email');
 
 
 var gmailAccount = process.env.GMAILACCOUNT || require('./secret/credentials')['gmailAccount'];
-var gmailPassword = process.env.GMAILPASSWORD || require('./secret/credentials')['gmailPassword'];
-var spreadsheetName = process.env.SPREADSHEETNAME || require('./secret/credentials')['spreadsheetName'];
+var spreadsheetId = process.env.SPREADSHEETID || require('./secret/credentials')['spreadsheetId'];
 var worksheetName = process.env.WORKSHEETNAME || require('./secret/credentials')['worksheetName'];
 
 module.exports = {
@@ -21,10 +20,13 @@ module.exports = {
       Spreadsheet.load({
         debug: true,
         useHTTPS: true,
-        spreadsheetName: spreadsheetName,
+        // spreadsheetName: spreadsheetName,
+        spreadsheetId: spreadsheetId,
         worksheetName: worksheetName,
-        username: gmailAccount,
-        password: gmailPassword
+        oauth : {
+          email: gmailAccount,
+          keyFile: 'google-oauth.pem'
+        },
       }, function sheetReady(err, spreadsheet){
         if(err) throw err;
 
@@ -58,10 +60,13 @@ module.exports = {
       Spreadsheet.load({
         debug: true,
         useHTTPS: true,
-        spreadsheetName: spreadsheetName,
+        // spreadsheetName: spreadsheetName,
+        spreadsheetId: spreadsheetId,
         worksheetName: worksheetName,
-        username: gmailAccount,
-        password: gmailPassword
+        oauth : {
+          email: gmailAccount,
+          keyFile: 'google-oauth.pem'
+        },
       }, function sheetReady(err, spreadsheet){
         if(err) throw err;
         spreadsheet.receive(function(err, rows, info){

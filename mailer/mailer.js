@@ -1,5 +1,6 @@
 var Promise = require('bluebird');
-var nodemailer = require('nodemailer');
+var sendgrid = require('sendgrid')();
+// var nodemailer = require('nodemailer');
 
 module.exports = {
   sendMail: function(emailObj, applicantEmailAddr){
