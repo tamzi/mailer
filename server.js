@@ -41,13 +41,15 @@ app.post('/newapplicant', function(req, res){
       return spreadsheetFunc.update(applicantData, nextIndex);
     })
     .then(function(promisedValue){
-      // 5. send out emails
-      mailer.sendMail(promisedValue.emailObj, applicantData.email); //send applicant the challenge email
-
+      // 5a. send out applicant email
+      return mailer.sendMail(promisedValue.emailObj, applicantData.email); //send applicant the challenge email
+    })
+    .then(function(promisedValue){
+      // 5b. send out admin email
       var adminEmailObj = email.adminNotificationEmail(applicantData);
       var emails = process.env.ADMINEMAILS || require('./secret/credentials')['adminEmail'];
       emails = JSON.parse('['+emails+']'); //convert the string to an array of email addresses
-      mailer.sendMail(adminEmailObj, emails);  //send administrators email about the applicant
+      return mailer.sendMail(adminEmailObj, emails);  //send administrators email about the applicant
     })
     .then(function(promisedValue){
       res.send('new applicant saved');

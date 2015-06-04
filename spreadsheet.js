@@ -89,6 +89,8 @@ module.exports = {
     }
     return objectKeys.sort(function(a,b){return b-a;})[0] + 1;
   },
+  //TBD: need to check if applicant is already in the spreadsheet to avoid duplication
+  //Currently return value set to false indicating that applicant does not exist in spreadsheet
   applicantExists: function(){
     var exists = false;
     return exists;
