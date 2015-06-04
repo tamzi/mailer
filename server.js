@@ -11,6 +11,8 @@ var port = process.env.PORT || 3000;
 
 // set the Access-Control-Allow-Origin header to the allowed origins
 app.use('/newapplicant', function(req, res, next){
+  res.set('Access-Control-Request-Headers', "Origin, X-Requested-With, Content-Type, Accept");
+  res.set('Access-Control-Allow-Methods', 'GET, POST');
   res.set('Access-Control-Allow-Origin', '*');
   next();
 });
