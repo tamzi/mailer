@@ -7,7 +7,7 @@ module.exports = {
     return new Promise(function(resolve, reject){
       sendgrid.send({
         to:       applicantEmailAddr,
-        from:     'admissions@moringaschool.com',
+        from:     'yes@yourwebsite.com',
         subject:  emailObj.emailSubject,
         html:     emailObj.emailContent
       }, function(err, json) {

@@ -49,7 +49,7 @@ app.post('/newapplicant', function(req, res){
     .then(function(promisedValue){
       // 5b. send out admin email
       var adminEmailObj = email.adminNotificationEmail(applicantData);
-      var emails = process.env.ADMINEMAILS || require('./secret/credentials')['adminEmail'];
+      var emails = process.env.ADMINEMAILS || require('./secret/credentials')['*anEmail*'];
       emails = JSON.parse('['+emails+']'); //convert the string to an array of email addresses
       return mailer.sendMail(adminEmailObj, emails);  //send administrators email about the applicant
     })
