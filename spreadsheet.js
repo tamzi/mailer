@@ -66,6 +66,7 @@ module.exports = {
         oauth : {
           email: gmailAccount,
           keyFile: 'google-oauth.pem'
+			/*the key file that you downloaded from google*/
         },
       }, function sheetReady(err, spreadsheet){
         if(err) throw err;

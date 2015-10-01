@@ -1,2 +1,2 @@
 # emailServer
-moringa school's email server
+ An email server

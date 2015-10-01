@@ -23,14 +23,17 @@ var emails = {
   }
 };
 
-var adminEmail = function(applicantData){
-  var email = '<p style="margin-top:0px">The following applicant just applied</p>';
-  email += "<p>Name: "+applicantData.firstname+" "+applicantData.lastname+"</p>";
-  email += "<p>Email: "+applicantData.email+"</p>";
-  email += "<p>Phone Number: "+applicantData.phone+"</p>";
-  email += "<p>Have you applied to Moringa School before? "+applicantData.appliedBefore+"</p>";
-  email += "<p>What interests you about web and mobile development? "+applicantData.interests+"</p>";
-  email += "<p>What sort of prior experience do you have with web and/or mobile development? "+applicantData.experience+"</p>";
+
+  /*sent to the admin*/
+var adminEmail = function(emailerData){
+  var email = '<p style="margin-top:0px">There is an email from</p>';
+  email += "<p>Name: "+emailerData.firstname+" "+emailerData.lastname+"</p>";
+  email += "<p>Email: "+emailerData.email+"</p>";
+  email += "<p>Phone Number: "+emailerData.phone+"</p>";
+  email += "<p>Title of email? "+emailerSubject.emailerInfo+"</p>";
+  email += "<p>What is your long message to us? "+emailerLong.else+"</p>";
+
+
 
   return email;
 };
